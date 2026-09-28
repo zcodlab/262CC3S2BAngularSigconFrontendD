@@ -1,1 +1,47 @@
-<p>principal works!</p>
+<div class="principal-container d-flex flex-grow-1">
+  <!-- Sidebar -->
+  <div class="sidebar bg-primary text-white p-3">
+    <a class="navbar-brand" routerLink="/">
+          <img src="assets/imagenes/operaciones/sigcon-brand-logo.svg" alt="SIGCON Logo" class="brand-logo" height="60">
+        </a>
+    <h4 class="mb-1 mt-4">Menú</h4>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link text-white">opcion 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white">opcion 2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white">opcion 3</a>
+        </li>
+    </ul>
+
+  </div><!--end sidebar-->
+
+  <!-- Main content -->
+  <div class="main-content flex-grow-1 d-flex flex-column">
+    <!-- Topbar -->
+    <nav class="navbar navbar-light bg-secondary-subtle justify-content-between px-4 border-bottom">
+      <div>
+
+          <strong>zmamani</strong> - <span>Admin</span>
+
+      </div>
+      <button class="btn btn-outline-danger btn-sm" (click)="logout()">Cerrar sesión</button>
+    </nav>
+
+    <!-- Main Section -->
+    <div class="content-area container-fluid p-3 flex-grow-1">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="text-start px-4 py-2 bg-secondary-subtle mt-auto">
+      <span>©SIGCON 2026</span>
+    </footer>
+
+  </div><!--end main-content-->
+</div><!--end principal-container-->
+
+
