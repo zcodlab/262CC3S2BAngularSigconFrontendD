@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UserRequest } from '../../../model/api/request/user-request';
 import { UserResponse } from '../../../model/api/response/user-response';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -18,6 +19,7 @@ export class InicioSesion {
   authService = inject(AuthService);
   userRequest:UserRequest={} as UserRequest;
   userResponse:UserResponse={} as UserResponse;
+  sessionService = inject(SessionService);
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -39,6 +41,7 @@ export class InicioSesion {
         console.log(this.userResponse);
         console.log('Login successful');
         this.authService.setToken(this.userResponse.token);
+        console.log(this.sessionService.getInfoSession());
         //this.toastService.show('Ingreso exitoso', 'success');
         alert('Ingreso exitoso')
         this.router.navigate(['/principal']);
