@@ -6,17 +6,12 @@
         </a>
     <h4 class="mb-1 mt-4">Menú</h4>
     <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link text-white">opcion 1</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white">opcion 2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white">opcion 3</a>
-        </li>
+        @for (modulo of user?.modulos; track modulo.idMod) {
+          <li class="nav-item">
+            <a class="nav-link text-white" [routerLink]="modulo.url">{{ modulo.descripcion }}</a>
+          </li>
+        }
     </ul>
-
   </div><!--end sidebar-->
 
   <!-- Main content -->
@@ -24,9 +19,9 @@
     <!-- Topbar -->
     <nav class="navbar navbar-light bg-secondary-subtle justify-content-between px-4 border-bottom">
       <div>
-
-          <strong>zmamani</strong> - <span>Admin</span>
-
+        @if (user) {
+          <strong>{{ user.names }} </strong> - <span>{{ user.rol.descripcion }}</span>
+        }
       </div>
       <button class="btn btn-outline-danger btn-sm" (click)="logout()">Cerrar sesión</button>
     </nav>
