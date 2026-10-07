@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UserRequest } from '../../../model/api/request/user-request';
@@ -46,11 +47,12 @@ export class InicioSesion {
         alert('Ingreso exitoso')
         this.router.navigate(['/principal']);
       },
-      (err:any)=>{
+      (err: HttpErrorResponse)=>{
         console.log(err);
         console.log('Login failed');
-        alert('Ingreso fallido')
-        //this.toastService.show('Ingreso fallido', 'danger');
+        const mensajeError = err.error?.message || 'Ingreso fallido';
+        alert(mensajeError);
+        //this.toastService.show(mensajeError, 'danger');
       }
 
     );
