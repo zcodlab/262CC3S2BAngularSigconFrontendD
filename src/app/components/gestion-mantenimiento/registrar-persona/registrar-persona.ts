@@ -12,6 +12,7 @@ import { TipoDocumento } from '../../../model/tipo-documento';
 import { UbigeoService } from '../../../services/ubigeo.service';
 import { Ubigeo } from '../../../model/ubigeo';
 import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -64,7 +65,7 @@ export class RegistrarPersona implements OnInit{
 
   getPersonas():void {
     this.personaService.getPersonas().subscribe((result:PersonaResponse[])=>{
-      console.log('getPersonas:',result);
+      //console.log('getPersonas:',result);
       this.personaArray=result;
       this.cdr.detectChanges();
     });
@@ -149,7 +150,7 @@ export class RegistrarPersona implements OnInit{
       cancelButtonText:'No',
       confirmButtonText:'Si',
       confirmButtonColor:'#000080',
-      cancelButtonColor:'#ff0000',
+      cancelButtonColor:'#b5b4b4',
       focusCancel:true,
     }).then((result)=>{
       if(result.isConfirmed){
@@ -164,12 +165,13 @@ export class RegistrarPersona implements OnInit{
             confirmButtonColor:'#000080',
           })
         },
-        (err:any)=>{
+        (err:HttpErrorResponse)=>{
+          console.log(err.error.message);
           Swal.fire({
             icon:'error',
             title:'registrarPersona...',
             text:'!Ah ocurrido un error al registrar datos de la persona!',
-            confirmButtonColor:'#ff0000',
+            confirmButtonColor:'#b5b4b4',
           })
         }
       )
@@ -192,12 +194,13 @@ export class RegistrarPersona implements OnInit{
             confirmButtonColor:'#000080',
           })
         },
-        (err:any)=>{
+        (err:HttpErrorResponse)=>{
+          console.log(err.error.message);
           Swal.fire({
             icon:'error',
             title:'actualizarPersona...',
             text:'!Ah ocurrido un error al actualizar los datos de la persona!',
-            confirmButtonColor:'#ff0000',
+            confirmButtonColor:'#b5b4b4',
           })
         }
     )
@@ -210,7 +213,7 @@ export class RegistrarPersona implements OnInit{
       cancelButtonText:'No',
       confirmButtonText:'Si',
       confirmButtonColor:'#000080',
-      cancelButtonColor:'#ff0000',
+      cancelButtonColor:'#b5b4b4',
       focusCancel:true,
     }).then((result)=>{
       if(result.isConfirmed){
@@ -239,7 +242,7 @@ export class RegistrarPersona implements OnInit{
       cancelButtonText:'No',
       confirmButtonText:'Si',
       confirmButtonColor:'#000080',
-      cancelButtonColor:'#ff0000',
+      cancelButtonColor:'#b5b4b4',
       focusCancel:true,
     }).then((result)=>{
       if(result.isConfirmed){
@@ -255,12 +258,13 @@ export class RegistrarPersona implements OnInit{
               confirmButtonColor:'#000080',
             })
           },
-          (err:any)=>{
+          (err:HttpErrorResponse)=>{
+            console.log(err.error.message);
             Swal.fire({
               icon:'error',
               title:'eliminarPersona...',
               text:'!Ah ocurrido un error al eliminar los datos de la persona!',
-              confirmButtonColor:'#ff0000',
+              confirmButtonColor:'#b5b4b4',
             })
           }
       )
