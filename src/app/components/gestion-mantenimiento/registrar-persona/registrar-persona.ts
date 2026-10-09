@@ -78,11 +78,6 @@ export class RegistrarPersona implements OnInit{
     });
   }
 
-  setSexo(event: Event): void{
-    const inputChangeValue=(event.target as HTMLInputElement).value;
-    this.personaForm.controls['idSexo'].setValue(inputChangeValue)
-  }
-
   getTipoDocumento():void {
     this.tipoDocumentoService.getTipoDocumento().subscribe((result:TipoDocumento[])=>{
       this.tipoDocumentoArray=result;
@@ -90,21 +85,11 @@ export class RegistrarPersona implements OnInit{
     });
   }
 
-  setTipoDocumento(event: Event): void {
-    const inputChangeValue=(event.target as HTMLInputElement).value;
-    this.personaForm.controls['idTipoDocumento'].setValue(inputChangeValue)
-  }
-
   getUbigeo():void {
     this.ubigeoService.getUbigeo().subscribe((result:Ubigeo[])=>{
       this.ubigeoArray=result;
       this.cdr.detectChanges();
     });
-  }
-
-  setUbigeo(event:Event):void{
-    const inputChangeValue=(event.target as HTMLInputElement).value;
-    this.personaForm.controls['idUbigeo'].setValue(inputChangeValue)
   }
 
   setPersonaRequest():void{

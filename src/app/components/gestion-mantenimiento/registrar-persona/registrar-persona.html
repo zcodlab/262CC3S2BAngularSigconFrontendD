@@ -49,10 +49,9 @@
               aria-label="Default select example"
               id="idSexo"
               formControlName="idSexo"
-              (change)="setSexo($event)"
               >
               @for(sexo of sexoArray; track sexo.idSexo){
-                <option value="{{sexo.idSexo}}">{{sexo.descripcion}}</option>
+                <option [ngValue]="sexo.idSexo">{{sexo.descripcion}}</option>
               }
               </select>
             </div>
@@ -77,10 +76,9 @@
               aria-label="Default select example"
               id="idTipoDocumento"
               formControlName="idTipoDocumento"
-              (change)="setTipoDocumento($event)"
               >
               @for(tipodoc of tipoDocumentoArray; track tipodoc.idTipoDocumento){
-                <option value="{{tipodoc.idTipoDocumento}}">{{tipodoc.descripcion}}</option>
+                <option [ngValue]="tipodoc.idTipoDocumento">{{tipodoc.descripcion}}</option>
               }
               </select>
             </div>
@@ -132,10 +130,9 @@
               aria-label="Default select example"
               id="idUbigeo"
               formControlName="idUbigeo"
-              (change)="setUbigeo($event)"
               >
               @for(ubigeo of ubigeoArray; track ubigeo.idUbigeo){
-                <option value="{{ubigeo.idUbigeo}}">{{
+                <option [ngValue]="ubigeo.idUbigeo">{{
                   ubigeo.departamento+"|"+
                   ubigeo.provincia+"|"+
                   ubigeo.distrito
@@ -144,12 +141,24 @@
               </select>
             </div>
           </div>
-          <button
-          type="submit"
-          class="btn btn-primary"
-          (click)="registrarPersona()"
-          >Registrar
-          </button>
+
+          <div class="mt-3">
+            <button
+            type="submit"
+            class="btn btn-primary me-2"
+            (click)="registrarPersona()"
+            [disabled]="personaForm.invalid"
+            >{{ isEdited ? 'Actualizar' : 'Registrar' }}
+            </button>
+
+            <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="refreshForm()"
+            >Cancelar
+            </button>
+
+          </div>
         </form>
       </div>
     </div>
