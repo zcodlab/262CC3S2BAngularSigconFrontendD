@@ -70,30 +70,47 @@
           </div>
 
           <div class="row mb-2">
-            <label for="idTipoDocumento" class="col-form-label col-sm-2">Tipo Documento:</label>
-            <div class="col-sm-2">
-              <select class="form-control form-select"
-              aria-label="Default select example"
-              id="idTipoDocumento"
-              formControlName="idTipoDocumento"
-              >
-              @for(tipodoc of tipoDocumentoArray; track tipodoc.idTipoDocumento){
-                <option [ngValue]="tipodoc.idTipoDocumento">{{tipodoc.descripcion}}</option>
-              }
-              </select>
-            </div>
-          </div>
+            <!-- Primera columna: Tipo Documento -->
+            <div class="col-md-4">
+              <div class="row">
+                <label for="idTipoDocumento" class="col-sm-6 col-form-label">
+                  Tipo Documento:
+                </label>
 
-          <div class="row mb-2">
-            <label for="numDocumento" class="col-form-label col-sm-2">N° Documento:</label>
-            <div class="col-sm-2">
-              <input
-              type="text"
-              class="form-control"
-              id="numDocumento"
-              placeholder="numDocumento"
-              formControlName="numDocumento"
-              />
+                <div class="col-sm-5">
+                  <select
+                    class="form-select"
+                    id="idTipoDocumento"
+                    formControlName="idTipoDocumento"
+                    aria-label="Tipo Documento"
+                  >
+                    @for (tipodoc of tipoDocumentoArray; track tipodoc.idTipoDocumento) {
+                      <option [ngValue]="tipodoc.idTipoDocumento">
+                        {{ tipodoc.descripcion }}
+                      </option>
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Segunda columna: Número de Documento -->
+            <div class="col-md-4">
+              <div class="row">
+                <label for="numDocumento" class="col-sm-4 col-form-label">
+                  N° Documento:
+                </label>
+
+                <div class="col-sm-5">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="numDocumento"
+                    placeholder="N° Documento"
+                    formControlName="numDocumento"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
