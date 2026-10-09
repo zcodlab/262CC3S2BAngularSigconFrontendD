@@ -6,7 +6,6 @@ import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { StorageService } from '../services/storage.service';
 import { AuthService } from '../services/auth.service';
 
-let isRefreshing = false;
 let isHandling401 = false;
 let refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
@@ -28,7 +27,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
-  const token = storageService.getToken();
+  const token = storageService.getItem("user_token");
   let authReq = req;
 
   if (token) {
@@ -46,51 +45,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         if (!isHandling401) {
           isHandling401 = true;
           authService.logout();
-          storageService.deleteSession();
+          storageService.removeItem("user_token");
           alert('Su sesion ha caducado debe volver a iniciar sesion');
           router.navigate(['/login']);
         }
       }
-      /*if (error instanceof HttpErrorResponse && error.status === 403) {
-        return handle403Error(authReq, next, authService);
-      }*/
       return throwError(() => error);
     })
   );
-};
-
-const handle403Error = (request: any, next: any, authService: AuthService): Observable<any> => {
-  if (!isRefreshing) {
-    isRefreshing = true;
-    refreshTokenSubject.next(null);
-
-    return authService.refreshToken().pipe(
-      switchMap((response) => {
-        isRefreshing = false;
-        refreshTokenSubject.next(response.token);
-        return next(request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${response.token}`
-          }
-        }));
-      }),
-      catchError((err) => {
-        isRefreshing = false;
-        authService.logout();
-        return throwError(() => err);
-      })
-    );
-  } else {
-    return refreshTokenSubject.pipe(
-      filter(token => token !== null),
-      take(1),
-      switchMap((token) => {
-        return next(request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${token}`
-          }
-        }));
-      })
-    );
-  }
 };

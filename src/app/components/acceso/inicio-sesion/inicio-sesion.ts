@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
-import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
@@ -15,7 +14,6 @@ import { SessionService } from '../../../services/session.service';
   styleUrl: './inicio-sesion.scss',
 })
 export class InicioSesion {
-  location = inject(Location);
   router = inject(Router);
   authService = inject(AuthService);
   userRequest:UserRequest={} as UserRequest;
@@ -60,7 +58,7 @@ export class InicioSesion {
   }//end login
 
   onBack() {
-    this.location.back();
+    this.router.navigate(['']);
   }
 
 }

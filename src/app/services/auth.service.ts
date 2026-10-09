@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { UserRequest } from '../model/api/request/user-request';
 import { UserResponse } from '../model/api/response/user-response';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -20,23 +20,8 @@ export class AuthService {
     return this.http.post<UserResponse>(`${environment.url}/auth/login`, user);
   }
 
-  refreshToken(): Observable<UserResponse> {
-    const refreshToken = this.storageService.getRefreshToken();
-    return this.http.post<UserResponse>(`${environment.url}/auth/refresh`, { refreshToken }).pipe(
-      tap((response: UserResponse) => {
-        this.setTokens(response.token, response.token);
-      })
-    );
-  }
-
-
   private hasToken(): boolean {
-    return !!this.storageService.getToken();
-  }
-
-  public setTokens(token: string, refreshToken: string) {
-    this.storageService.updateSession(token, refreshToken);
-    this._isLoggedIn.set(true);
+    return !!this.storageService.getItem("user_token");
   }
 
   // Mantengo setToken por compatibilidad si se usa en otros sitios
@@ -47,7 +32,6 @@ export class AuthService {
 
   logout() {
     this.storageService.removeItem('user_token');
-    this.storageService.removeCookie('refresh_token');
     this._isLoggedIn.set(false);
   }
 }
