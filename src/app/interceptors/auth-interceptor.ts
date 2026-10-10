@@ -1,13 +1,12 @@
 import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, switchMap, filter, take } from 'rxjs/operators';
+import { throwError} from 'rxjs';
+import { catchError} from 'rxjs/operators';
 import { StorageService } from '../services/storage.service';
 import { AuthService } from '../services/auth.service';
 
 let isHandling401 = false;
-let refreshTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const storageService = inject(StorageService);
@@ -15,8 +14,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
 
   const excludedPaths = [
-    '/auth/login',
-    '/auth/refresh'
+    '/auth/login'
   ];
 
   const shouldExclude = excludedPaths.some(path =>

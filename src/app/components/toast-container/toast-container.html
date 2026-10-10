@@ -2,7 +2,7 @@
     <ngb-toast
         [class]="getToastClass(toast.type)"
         [autohide]="true"
-        [delay]="1200"
+        [delay]="3000"
         (hidden)="toastService.remove(toast)"
     >
         {{ toast.message }}
