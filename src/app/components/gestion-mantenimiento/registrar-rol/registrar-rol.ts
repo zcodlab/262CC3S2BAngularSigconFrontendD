@@ -102,7 +102,7 @@ listModulo: Modulo[] = [];
 
   openEdit(value: RolResponse) {
     forkJoin({
-      resultResponse: this.service.find({ id: value.id })
+      resultResponse: this.service.find({ idRol: value.idRol })
     }).subscribe({
       next: ({ resultResponse }) => {
         this.record = resultResponse;
@@ -135,8 +135,8 @@ listModulo: Modulo[] = [];
         Swal.close();
         Swal.fire({
           icon: 'success',
-          title: this.record.id ? 'Actualización Exitosa' : 'Registro Exitoso',
-          text: 'El rol ' + result.descripcion + ' fue ' + (this.record.id ? 'actualizado' : 'registrado'),
+          title: this.record.idRol ? 'Actualización Exitosa' : 'Registro Exitoso',
+          text: 'El rol ' + result.descripcion + ' fue ' + (this.record.idRol ? 'actualizado' : 'registrado'),
         });
         this.dialogRef.close();
       },
@@ -160,7 +160,7 @@ listModulo: Modulo[] = [];
       focusCancel: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.delete({ id: value.id }).subscribe(
+        this.service.delete({ idRol: value.idRol }).subscribe(
           (result: RolResponse) => {
             this.search();
             Swal.close();
@@ -187,7 +187,7 @@ listModulo: Modulo[] = [];
     this.columns = [
       { name: 'Nro.', prop: 'row', width: 40 },
       { name: 'Código', prop: 'codigo' },
-      { name: 'Nombre', prop: 'nombre' },
+      { name: 'Nombre', prop: 'descripcion' },
       { name: 'Acciones', cellTemplate: this.colAccionTemplate, width: 80 }
     ];
   }

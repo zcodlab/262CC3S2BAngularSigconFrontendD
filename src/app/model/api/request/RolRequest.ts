@@ -1,5 +1,5 @@
 export class RolRequest {
-    id?: number;
+    idRol?: number;
     codigo?: string;
     descripcion?: string;
     activo?: boolean;

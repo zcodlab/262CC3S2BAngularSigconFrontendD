@@ -1,6 +1,6 @@
 export interface Rol {
   idRol: number;
-  descripcion: string;
   codigo: string;
+  descripcion: string;
   activo: boolean;
 }
