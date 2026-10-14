@@ -5,6 +5,7 @@ import { Principal } from './components/principal/principal';
 import { RegistrarPersona } from './components/gestion-mantenimiento/registrar-persona/registrar-persona';
 import { RegistrarProveedor } from './components/gestion-mantenimiento/registrar-proveedor/registrar-proveedor';
 import { SeguimientoSolicitudCotizacion } from './components/gestion-servicios/seguimiento-solicitud-cotizacion/seguimiento-solicitud-cotizacion';
+import { RegistrarRol } from './components/gestion-mantenimiento/registrar-rol/registrar-rol';
 // Importar los guards
 import { authGuard } from './guards/auth-guard';
 import { moduloGuard } from './guards/modulo-guard';
@@ -19,10 +20,13 @@ export const routes: Routes = [
         canActivate: [moduloGuard] // Valida que el usuario tenga acceso a este submódulo
       },
       { path: 'RegistrarProveedor', component: RegistrarProveedor,
-        canActivate: [moduloGuard] // Valida que el usuario tenga acceso a este submódulo
+        canActivate: [moduloGuard]
       },
       { path: 'SeguimientoSolicitudCotizacion', component: SeguimientoSolicitudCotizacion,
-        canActivate: [moduloGuard] // Valida que el usuario tenga acceso a este submódulo
+        canActivate: [moduloGuard]
+      },
+      { path: 'RegistrarRol', component: RegistrarRol,
+        canActivate: [moduloGuard]
       },
   ]},
   { path: '**', redirectTo:''},

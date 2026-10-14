@@ -1,0 +1,71 @@
+<div class="mb-4">
+    <h1>Gestión de Roles</h1>
+    <hr>
+</div>
+
+<div class="container mb-3">
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Buscar por Nombre</mat-label>
+                <input matInput [(ngModel)]="filter.descripcion" maxlength="50" (input)="RG.name($event)">
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-3 d-flex justify-content-start align-items-center mb-3">
+            <button class="btn btn-primary" (click)="search()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="btn btn-secondary" (click)="cleanSearch()" style="margin-left: 10px;">
+                <i class="fas fa-eraser"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-success" (click)="openAdd()">
+        <i class="fas fa-plus"></i>
+    </button>
+</div>
+
+<ngx-datatable class="bootstrap" [rows]="result" [columns]="columns" [limit]="5" [columnMode]="'force'"
+    [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'">
+
+    <ng-template #colAccionTemplate let-row="row">
+        <button class="btn btn-warning btn-sm" (click)="openEdit(row)">
+            <i class="fas fa-pencil"></i>
+        </button>
+        <button class="btn btn-danger btn-sm" style="margin-left: 5px;" (click)="delete(row)">
+            <i class="fas fa-trash"></i>
+        </button>
+    </ng-template>
+
+</ngx-datatable>
+
+<ng-template #dialogTemplate>
+    <h2 mat-dialog-title>{{ record.id ? 'Editar Rol' : 'Agregar Rol' }}</h2>
+    <mat-dialog-content>
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Código</mat-label>
+            <input matInput [(ngModel)]="record.codigo" maxlength="6" (input)="RG.name($event)" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Nombre</mat-label>
+            <input matInput [(ngModel)]="record.descripcion" maxlength="50" (input)="RG.name($event)" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Accesos</mat-label>
+            <mat-select [(ngModel)]="record.paginas" multiple>
+                <!--<mat-option *ngFor="let pg of listPagina" [value]="pg.id">
+                    {{ pg.nombre }}
+                </mat-option>-->
+            </mat-select>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="dialogRef.close()">Cancelar</button>
+        <button mat-flat-button color="primary" (click)="save()">Guardar</button>
+    </mat-dialog-actions>
+</ng-template>
