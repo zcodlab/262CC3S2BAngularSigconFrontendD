@@ -6,6 +6,7 @@ import { RegistrarPersona } from './components/gestion-mantenimiento/registrar-p
 import { RegistrarProveedor } from './components/gestion-mantenimiento/registrar-proveedor/registrar-proveedor';
 import { SeguimientoSolicitudCotizacion } from './components/gestion-servicios/seguimiento-solicitud-cotizacion/seguimiento-solicitud-cotizacion';
 import { RegistrarRol } from './components/gestion-mantenimiento/registrar-rol/registrar-rol';
+import { RegistrarModulo } from './components/gestion-mantenimiento/registrar-modulo/registrar-modulo';
 // Importar los guards
 import { authGuard } from './guards/auth-guard';
 import { moduloGuard } from './guards/modulo-guard';
@@ -26,6 +27,9 @@ export const routes: Routes = [
         canActivate: [moduloGuard]
       },
       { path: 'RegistrarRol', component: RegistrarRol,
+        canActivate: [moduloGuard]
+      },
+      { path: 'RegistrarModulos', component: RegistrarModulo,
         canActivate: [moduloGuard]
       },
   ]},
