@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { PersonaRequest } from '../model/api/request/persona-request';
 import { PersonaResponse } from '../model/api/response/persona-response';
-
+import { NPersonasXTipoDocumento } from '../model/api/response/npersonas-xtipo-documento';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,5 +28,11 @@ export class PersonaService {
 
   actualizarPersona(persona: PersonaRequest): Observable<PersonaResponse> {
     return this.http.put<PersonaResponse>(`${environment.url}/persona`, persona);
+  }
+
+  getNPersonasXTipoDocumento(): Observable<NPersonasXTipoDocumento[]> {
+    return this.http.get<NPersonasXTipoDocumento[]>(
+      `${environment.url}/persona/NPersonasXTipoDocumento`
+    );
   }
 }
