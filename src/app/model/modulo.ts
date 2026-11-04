@@ -4,4 +4,5 @@ export interface Modulo extends ClassGeneric{
   descripcion: string;
   url: string;
   activo: boolean;
+  ordenOpcion: number;
 }

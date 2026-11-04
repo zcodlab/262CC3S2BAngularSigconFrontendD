@@ -18,6 +18,12 @@ export class Principal implements OnInit{
 
   ngOnInit(): void {
     this.user=this.sessionService.getInfoSession();
+    if (this.user && this.user.modulos && this.router.url === '/principal') {
+      const firstModule = this.user.modulos.find(m => m.ordenOpcion === 1);
+      if (firstModule) {
+        this.router.navigate(['/principal', firstModule.url]);
+      }
+    }
   }
 
   logout(){

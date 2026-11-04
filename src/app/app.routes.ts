@@ -7,6 +7,7 @@ import { RegistrarProveedor } from './components/gestion-mantenimiento/registrar
 import { SeguimientoSolicitudCotizacion } from './components/gestion-servicios/seguimiento-solicitud-cotizacion/seguimiento-solicitud-cotizacion';
 import { RegistrarRol } from './components/gestion-mantenimiento/registrar-rol/registrar-rol';
 import { RegistrarModulo } from './components/gestion-mantenimiento/registrar-modulo/registrar-modulo';
+import { ChartPersona } from './components/dashboards/chart-persona/chart-persona';
 // Importar los guards
 import { authGuard } from './guards/auth-guard';
 import { moduloGuard } from './guards/modulo-guard';
@@ -17,6 +18,9 @@ export const routes: Routes = [
   { path: 'principal', component: Principal,
     canActivate: [authGuard], // Bloquea todo /principal si no hay sesión
     children:[
+      { path: 'Inicio', component: ChartPersona,
+        canActivate: [moduloGuard]
+      },
       { path: 'RegistrarPersona', component: RegistrarPersona,
         canActivate: [moduloGuard] // Valida que el usuario tenga acceso a este submódulo
       },
